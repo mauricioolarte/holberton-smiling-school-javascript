@@ -1,0 +1,117 @@
+/* latest videos */
+		await $.get("https://smileschool-api.hbtn.info/popular-tutorials", function (data, status) {
+			console.log(data)
+			console.log(status)
+			let carouseContainer = $("#carouselMostPVideos")
+			for (let i = 0; i < data.length; i++) {
+
+
+				let cardItemActive = document.createElement("div")
+				cardItemActive.className = "carousel-item active"
+				cardItemActive.width = "200"
+				let cardItem = document.createElement("div")
+				cardItem.className = "carousel-item w-20"
+
+				let cardContainer = document.createElement("div")
+				cardContainer.className = "card border-0 hidden-sm-down"
+
+				/* card elements*/
+				/* images */
+				let imageVideo = document.createElement("img")
+				imageVideo.className = "card-img-top d-block"
+				imageVideo.src = data[i].thumb_url
+
+				let imagePlayIcon = document.createElement("img")
+				imagePlayIcon.className = "position-absolute"
+				imagePlayIcon.src = "images/play.png"
+				imagePlayIcon.width = "60"
+
+				/* card body video*/
+
+				let cardBodyVideo = document.createElement("div")
+				cardBodyVideo.className = "card-body mx-0 px-0"
+
+				let cardBodyVideo1 = document.createElement("div")
+
+				let titleVideo = document.createElement("h5")
+				titleVideo.className = "font-weight-bold"
+				titleVideo.textContent = data[i].title
+				let subTitle = document.createElement("p")
+				subTitle.className = "card-text"
+				subTitle.textContent = data[i]['sub-title']
+
+				cardBodyVideo1.append(titleVideo)
+				cardBodyVideo1.append(subTitle)
+
+				/* author image and name */
+				let authorVideoImageContainer = document.createElement("span")
+				authorVideoImageContainer.className = "d-flex flex-row"
+				let authorVideoImage = document.createElement("img")
+				authorVideoImage.className = "rounded-circle"
+				authorVideoImage.width = "35"
+				authorVideoImage.height = "35"
+				authorVideoImage.src = data[i].author_pic_url
+				let authorVideoName = document.createElement("p")
+
+				authorVideoName.className = "font-weight-bold ml-2 mt-1"
+				authorVideoName.textContent = data[i].author
+
+				cardBodyVideo1.append(authorVideoImageContainer)
+
+				authorVideoImageContainer.append(authorVideoImage)
+				authorVideoImageContainer.append(authorVideoName)
+
+				/* starts */
+				let starsTimeContainer = document.createElement("span")
+				starsTimeContainer.className = "d-flex flex-row justify-content-between"
+				let starsContainer = document.createElement("span")
+				let starImage1 = document.createElement("img")
+				starImage1.src = "images/star_on.png"
+				starImage1.width = "15"
+				starImage1.className = "star-1"
+				let starImage2 = document.createElement("img")
+				starImage2.src = "images/star_on.png"
+				starImage2.width = "15"
+				starImage2.className = "star-2"
+				let starImage3 = document.createElement("img")
+				starImage3.src = "images/star_on.png"
+				starImage3.width = "15"
+				starImage3.className = "star-3"
+				let starImage4 = document.createElement("img")
+				starImage4.src = "images/star_on.png"
+				starImage4.width = "15"
+				starImage4.className = "star-4"
+				let starImage5 = document.createElement("img")
+				starImage5.src = "images/star_on.png"
+				starImage5.width = "15"
+				starImage5.className = "star-5"
+
+				let starTime = document.createElement("p")
+				starTime.className = "profile-video p-0 m-0"
+				starTime.textContent = data[i].duration
+
+				starsContainer.append(starImage1)
+				starsContainer.append(starImage2)
+				starsContainer.append(starImage3)
+				starsContainer.append(starImage4)
+				starsContainer.append(starImage5)
+
+				starsTimeContainer.append(starsContainer)
+				starsTimeContainer.append(starTime)
+
+				cardBodyVideo.append(cardBodyVideo1)
+				cardBodyVideo.append(starsTimeContainer)
+
+				cardContainer.append(imageVideo)
+				cardContainer.append(imagePlayIcon)
+				cardContainer.append(cardBodyVideo)
+
+				if (i == 0) {
+					cardItemActive.append(cardContainer)
+					carouseContainer.append(cardItemActive)
+				} else {
+					cardItem.append(cardContainer)
+					carouseContainer.append(cardItem)
+				}
+			}
+			$("#spinerLastVideos").hide()

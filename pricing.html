@@ -198,54 +198,5 @@
 		</div>
 	</footer>
 </body>
-<script>
-
-	$(document).ready(async function () {
-		await $.get('https://smileschool-api.hbtn.info/quotes', function (data, status) {
-
-			for (let i = 0; i < data.length; i++) {
-				let carouseContainer = $("#carouselContainer")
-				let cardItemActive = document.createElement("div")
-				cardItemActive.className = "carousel-item active"
-				let cardItem = document.createElement("div")
-				cardItem.className = "carousel-item"
-				let cardContainer = document.createElement("div")
-				cardContainer.className = "row flex-wrap justify-content-center mb-5"
-				let imageContainer = document.createElement("div")
-				imageContainer.className = "col col-sm-4 col-md-2 mt-5 d-flex justify-content-center"
-				let profileImage = document.createElement("img")
-				profileImage.src = data[i].pic_url
-				profileImage.className = "img rounded-circle"
-				profileImage.height = "140"
-
-				let textContainer = document.createElement("div")
-				textContainer.className = "col-11 col-md-6 col-lg-8 item-content mt-5 text-white"
-				let quoteTitle = document.createElement("h5")
-				quoteTitle.textContent = data[i].text
-				let personName = document.createElement("p")
-				personName.textContent = data[i].name
-				let personTitle = document.createElement("p")
-				personTitle.textContent = data[i].title
-
-				textContainer.append(quoteTitle)
-				textContainer.append(personName)
-				textContainer.append(personTitle)
-
-				imageContainer.append(profileImage)
-				cardContainer.append(imageContainer)
-				cardContainer.append(textContainer)
-				if (i == 0) {
-					cardItemActive.append(cardContainer)
-					carouseContainer.append(cardItemActive)
-				} else {
-					cardItem.append(cardContainer)
-					carouseContainer.append(cardItem)
-				}
-			}
-			$(".loader").hide()
-		})
-	}
-	)
-</script>
 
 </html>
